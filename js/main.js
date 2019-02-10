@@ -2,6 +2,17 @@
 $(document).ready(function(){
 
   //------------------------------
+  // Btn down
+  //------------------------------
+
+$('.icon_down').click(function(){
+  var altura  = $(window).height()-($(".menu_header:visible").length?0:0);
+  $('html,body').animate({scrollTop: "+="+$(window).height()});
+})
+
+
+//Background
+  //------------------------------
   // Mesh Properties
   //------------------------------
   var MESH = {
@@ -281,9 +292,6 @@ $(document).ready(function(){
     resize(container.offsetWidth, container.offsetHeight);
     render();
   }
-
-
-
   // Let there be light!
   initialise();
 });
