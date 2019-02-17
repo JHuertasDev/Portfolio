@@ -143,12 +143,15 @@ input.invalid {
 .step{
     display: none;
 }
-#form_contact{
+#form_contact, .response{
   background: #252934;
   margin: 50px auto;
   padding: 40px;
   width: 70%;
   min-width: 300px;
+}
+.response{
+  display: none;
 }
 
 #contact .cont_section{
@@ -216,4 +219,11 @@ button:hover {
 
 #prevBtn {
   background-color: #bbbbbb;
+}
+
+
+/*------ABOUT-------------*/
+
+#about{
+  background-color: #18181a;
 }

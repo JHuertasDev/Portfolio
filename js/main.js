@@ -334,12 +334,12 @@ $(document).ready(function(){
 			prevBtn.css('display','inline');
 		}
 		if (n == (y.length - 1)) {
-			document.getElementById("nextBtn").innerHTML = "Submit";
+			document.getElementById("nextBtn").innerHTML = "Enviar";
 		} else {
-			document.getElementById("nextBtn").innerHTML = "Next";
+			document.getElementById("nextBtn").innerHTML = "Siguiente";
 		}
 		// ... and run a function that displays the correct step indicator:
-		fixStepIndicator(n)
+		fixStepIndicator(n);
 	}
 
 	function fixStepIndicator(n) {
@@ -368,7 +368,6 @@ $(document).ready(function(){
 		
 		// Hide the current tab:
 		// Ocultamos el tab actual
-		//x[currentTab].style.display = "none";
 		$(x[currentTab]).toggle("slide");
 
 		// Increase or decrease the current tab by 1:
@@ -379,32 +378,69 @@ $(document).ready(function(){
 		// Si alcanzaste el final del form
 
 		if (currentTab >= x.length) {
-			//...the form gets submitted:
-			//... Se envia el form:
-			document.getElementById("regForm").submit();
+			//...Send the form with jquery
+			//... Envio el form con jquery:
+			sendForm();
+			
 			return false;
 		}
 		// Otherwise, display the correct tab:
 		showTab(currentTab);
 	}
 
+	//This function is going to send the form to a php page using aJax
+	//Esta pagina va a enviar el formulario usando Ajax
+	function sendForm() {
+		console.log("Serialize: "+$("#form_contact").serialize());
+		$.ajax({
+			type: 'post',
+			url: 'send-mail.php',
+			data: $("#form_contact").serialize(),
+			success: function (e) {
+				changeFormResponse(e);
+		  }
+		});
+	}
+	function changeFormResponse(e){
+		$('#form_contact').toggle('slide');
+		$('.response .sub_title_form').html(e);
+		$('.response').toggle('slide');
+	}
 	function validateForm() {
 		// This function deals with validation of the form fields
 		var x, y, i, valid = true;
 		x = document.getElementsByClassName("step");
 		y = x[currentTab].getElementsByTagName("input");
-		// A loop that checks every input field in the current tab:
-		for (i = 0; i < y.length; i++) {
-			// If a field is empty...
-			if (y[i].value == "") {
-				// add an "invalid" class to the field:
-				y[i].className += " invalid";
-				// and set the current valid status to false:
-				valid = false;
+		console.log(y);
+		if(y[0] == null){
+			y = x[currentTab].getElementsByTagName("textarea");
+		}
+		console.log("Current tab: "+currentTab);
+
+		//Verify if is an email
+		if(currentTab == 1){
+			 var testEmail = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
+			 var value = y[0].value;
+			 if(!testEmail.test(value)){
+					valid = false;
+					y[0].className += " invalid";
+			 }
+		}else{
+			// A loop that checks every input field in the current tab:
+			for (i = 0; i < y.length; i++) {
+				// If a field is empty...
+				if (y[i].value == "") {
+					// add an "invalid" class to the field:
+					y[i].className += " invalid";
+					// and set the current valid status to false:
+					valid = false;
+				}
 			}
 		}
+		
 		// If the valid status is true, mark the step as finished and valid:
 		if (valid) {
+			y[0].classList.remove("invalid");
 			document.getElementsByClassName("step")[currentTab].className += " finish";
 		}
 		return valid; // return the valid status

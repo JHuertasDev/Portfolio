@@ -49,6 +49,11 @@
 		      </div>
 	    </div>
     </div>
+    <div class="section" id="about">
+		<div class="cont_section">
+			<div class="title">Contacto</div>
+	    </div>
+    </div>
     <div class="section" id="contact">
 		<div class="cont_section">
 			<div class="title">Contacto</div>
@@ -66,23 +71,27 @@
 					<!-- Creo un div para cada paso-->
 					<div class="step">
 						<div class="sub_title_form">Escribe tu nombre</div>
-						<p><input placeholder="Escribe tu primer nombre..."></p>
+						<p><input name="name" placeholder="Escribe tu primer nombre..."></p>
 					</div>
 					<div class="step">
 						<div class="sub_title_form">Escribe tu mail</div>
-						<p><input placeholder="Escribe tu mail..." ></p>
+						<p><input name="mail" placeholder="Escribe tu mail..." ></p>
 					</div>
 					<div class="step">
 						<div class="sub_title_form">Escribe tu mensaje</div>
-						<p><textarea form="form_contact"></textarea></p>
+						<p><textarea name ="message" form="form_contact"></textarea></p>
 					</div>
 					<div id="btns_cont">
 						<div id="btns_hold">
-						    <button type="button" id="prevBtn" >Previous</button>
-						    <button type="button" id="nextBtn" >Next</button>
+						    <button type="button" id="prevBtn" >Anterior</button>
+						    <button type="button" id="nextBtn" >Siguiente</button>
 						</div>
 					</div>
 				</div>
+			</form> 
+			<form class="response">
+    			<div class="sub_title_form">Listo !</div>
+			</form>
 	    </div>
     </div>
 </body>
