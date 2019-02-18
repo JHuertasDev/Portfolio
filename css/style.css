@@ -9,6 +9,9 @@ ul {
 a {
 	    text-decoration: none;
 }
+li{
+  list-style-type: none;
+}
 .section{
     position: relative;
     padding-left: 246px;
@@ -41,6 +44,7 @@ a {
 }
 .title{
     margin-top: 30px;
+    font-weight: 200;
 }
 #welcome canvas{
 	position: absolute;
@@ -78,6 +82,9 @@ a {
 }
 .menu ul{
 	
+}
+#menu-welcome{
+  color: #e7f743;
 }
 .menu-item {
     cursor: pointer;
@@ -226,4 +233,42 @@ button:hover {
 
 #about{
   background-color: #18181a;
+  color: #fff;
+  height: auto;
+  min-height: 100vh;
+}
+#about .title{
+  margin-bottom: 40px;
+}
+.skills_col {
+  /* width: 50%; */
+  padding: 10px;
+  box-sizing: border-box;
+}
+.skills_about{
+  position: relative;
+  top: 50px;
+}
+.skills_icons{
+  font-size: 50px;
+  color: #3eae68;
+  padding: 0 100px;
+  box-sizing: border-box;
+}
+.skills_icons li {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  width: 20%;
+  position: relative;
+}
+.skills_icons li {
+  font-size: 0;
+}
+.skills_icons li:nth-of-type(odd) {
+    padding: 0 0 50px;
+
+}
+.skills_icons li:nth-of-type(even) {
+    padding: 50px 0 0;
 }

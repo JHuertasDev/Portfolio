@@ -452,4 +452,49 @@ $(document).ready(function(){
 	$('#nextBtn').click(function(){
 		nextPrev(1);
 	});
+
+	
+
+	$(window).scroll(function(){
+		// This is then function used to detect if the element is scrolled into view
+		function elementScrolled(elem){
+			var docViewTop = $(window).scrollTop();
+			var docViewBottom = docViewTop + $(window).height();
+			var elemTop = $(elem).offset().top;
+			return ((elemTop <= docViewBottom) && (elemTop >= docViewTop));
+	  	}
+
+		// This is where we use the function to detect if ".box2" is scrolled into view, and when it is add the class ".animated" to the <p> child element
+		if(elementScrolled('#about')) {
+			$('.menu-item a').css({color:'#a5a5a5'})
+			$('#menu-about').css({color:'#e7f743'});
+			var firstThree = $('.skills_icons li:nth-of-type(1), .skills_icons li:nth-of-type(5), .skills_icons li:nth-of-type(3) ');
+			var secondThree = $('.skills_icons li:nth-of-type(7), .skills_icons li:nth-of-type(2), .skills_icons li:nth-of-type(9) ');
+			var thirdThree = $('.skills_icons li:nth-of-type(4), .skills_icons li:nth-of-type(8), .skills_icons li:nth-of-type(6) ');
+			var slow = 'slow';
+			
+			$('.skills_about').animate({'top': '0'},slow);
+			firstThree.animate({'font-size': '50px'},slow,function(){
+				secondThree.animate({'font-size': '50px'},slow,function(){
+					thirdThree.animate({'font-size': '50px'},slow);
+				});
+			});
+		}else{
+			$('#menu-about').css({color:'#a5a5a5'});
+		}
+		if(elementScrolled('#welcome')) {
+			$('.menu-item a').css({color:'#a5a5a5'})
+			$('#menu-welcome').css({color:'#e7f743'});
+		}else{
+			$('#menu-welcome').css({color:'#a5a5a5'});
+		}
+		if(elementScrolled('#contact')) {
+			$('.menu-item a').css({color:'#a5a5a5'})
+			$('#menu-contact').css({color:'#e7f743'});
+		}else{
+			$('#menu-contact').css({color:'#a5a5a5'});
+		}
+	});
+
+	
 });
