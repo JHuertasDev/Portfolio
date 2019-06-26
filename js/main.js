@@ -1,7 +1,70 @@
 
 $(document).ready(function(){
+	$('.menu_toggle').click(function(){
+		$("#mobile_menu_holder").toggleClass("act").slideToggle("fast");
+	});
 
-	//
+	//------------------------------
+	//ReadMore section proyects
+	//------------------------------
+	$('.more').click(function(){
+
+		var displayMore = $('.img_more').css('display');
+		var isMobile = $('.btn').css('position') == 'relative';
+		if(displayMore != 'none'){
+			//If we are not displaying all the proyects 
+
+			var proyects = $('#proyects');
+
+			if(isMobile){
+				var curHeight = proyects.height();
+				$('.proyect').css('display','block');
+
+				var autoHeight = proyects.height()+40;
+				proyects.height(curHeight).animate({height: autoHeight}, 600,function(){
+					proyects.css('height', 'auto');
+				});
+
+			}else{
+				var curHeight = proyects.height();
+				
+				proyects.css('height', 'auto');
+				var autoHeight = proyects.height()+220;
+
+				proyects.height(curHeight).animate({height: autoHeight}, 600);
+			}
+			$('.img_more').css('display','none');
+			$('.img_less').css('display','inline');
+		}else{
+			$('html, body').animate({
+				scrollTop: ($('#proyects').offset().top-0.1)
+			}, 600,function(){
+				var proyects = $('#proyects');				
+				if(isMobile){
+					var curHeight = proyects.height();
+					$('.proyect').css('display','none');
+					$('.proyect:first-of-type').css('display','block');
+					proyects.css('height', 'auto');
+					var autoHeight = proyects.height()+40;
+					proyects.height(curHeight).animate({height: autoHeight}, 600,function(){
+						proyects.css('height', 'auto');
+					});
+
+				}else{
+					var fullVh = proyects.height();
+
+					proyects.animate({height: '100vh'}, 600);
+
+
+					$('.img_more').css('display','inline');
+					$('.img_less').css('display','none');
+				}
+			});
+			
+		}
+
+		
+	});
 
 	//------------------------------
 	// Btn down
@@ -10,6 +73,7 @@ $(document).ready(function(){
 	$('.icon_down').click(function(){
 		var altura  = $(window).height()-($(".menu_header:visible").length?0:0);
 		$('html,body').animate({scrollTop: "+="+$(window).height()});
+
 	});
 
 
@@ -464,9 +528,9 @@ $(document).ready(function(){
 			return ((elemTop <= docViewBottom) && (elemTop >= docViewTop));
 	  	}
 
-		// This is where we use the function to detect if ".box2" is scrolled into view, and when it is add the class ".animated" to the <p> child element
 		if(elementScrolled('#about')) {
 			$('.menu-item a').css({color:'#a5a5a5'})
+			$('#menu-about-m').css({color:'#e7f743'});
 			$('#menu-about').css({color:'#e7f743'});
 			var firstThree = $('.skills_icons li:nth-of-type(1), .skills_icons li:nth-of-type(5), .skills_icons li:nth-of-type(3) ');
 			var secondThree = $('.skills_icons li:nth-of-type(7), .skills_icons li:nth-of-type(2), .skills_icons li:nth-of-type(9) ');
@@ -480,21 +544,45 @@ $(document).ready(function(){
 				});
 			});
 		}else{
+			$('#menu-about-m').css({color:'#a5a5a5'});
 			$('#menu-about').css({color:'#a5a5a5'});
 		}
 		if(elementScrolled('#welcome')) {
+			
 			$('.menu-item a').css({color:'#a5a5a5'})
+			$('#menu-welcome-m').css({color:'#e7f743'});
 			$('#menu-welcome').css({color:'#e7f743'});
 		}else{
+			$('#menu-welcome-m').css({color:'#a5a5a5'});
 			$('#menu-welcome').css({color:'#a5a5a5'});
+		}
+		if(elementScrolled('#proyects')) {
+			$('.menu-item a').css({color:'#a5a5a5'})
+			$('#menu-proyects-m').css({color:'#e7f743'});
+			$('#menu-proyects').css({color:'#e7f743'});
+		}else{
+			$('#menu-proyects-m').css({color:'#a5a5a5'});
+			$('#menu-proyects').css({color:'#a5a5a5'});
 		}
 		if(elementScrolled('#contact')) {
 			$('.menu-item a').css({color:'#a5a5a5'})
 			$('#menu-contact').css({color:'#e7f743'});
+			$('#menu-contact-m').css({color:'#e7f743'});
 		}else{
+			$('#menu-contact-m').css({color:'#a5a5a5'});
 			$('#menu-contact').css({color:'#a5a5a5'});
 		}
 	});
 
 	
+
+	//When click on an menu item, scroll to the section.
+	$('.menu-item a').click(function (e) {
+		e.preventDefault();
+		var href = $(this).attr('href');
+
+		$('html, body').animate({
+			scrollTop: ($(href).offset().top-0.1)
+		}, 600);
+	});
 });
